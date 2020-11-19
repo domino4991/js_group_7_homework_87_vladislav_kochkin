@@ -15,15 +15,15 @@ const SinglePost = props => {
 
     return (
         <>
-            <Container maxWidth="lg">
-                {post && <SinglePostItem
+            {post && <Container maxWidth="lg">
+                <SinglePostItem
                     userName={post.author.name}
                     title={post.title}
                     datetime={post.datetime}
                     description={post.description}
                     image={post.image}
-                />}
-            </Container>
+                />
+            </Container>}
         </>
     );
 };

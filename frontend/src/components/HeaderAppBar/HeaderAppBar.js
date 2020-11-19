@@ -1,8 +1,9 @@
 import React from 'react';
 import {makeStyles} from "@material-ui/core/styles";
-import {AppBar, Toolbar, Typography, Button} from "@material-ui/core";
+import {AppBar, Toolbar, Typography, Button, Menu, MenuItem} from "@material-ui/core";
 import {NavLink} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {logoutUser} from "../../store/actions/usersActions";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -20,6 +21,18 @@ const useStyles = makeStyles((theme) => ({
 const HeaderAppBar = () => {
     const classes = useStyles();
     const {user} = useSelector(state => state.users);
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const dispatch = useDispatch();
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        dispatch(logoutUser());
+        setAnchorEl(null);
+    }
+
     return (
         <div className={classes.root}>
             <AppBar position="static">
@@ -27,15 +40,15 @@ const HeaderAppBar = () => {
                     <Typography variant="h6" className={classes.title}>
                         <Button color="inherit" component={NavLink} to="/" className={classes.link}>Forum</Button>
                     </Typography>
+                    <Button
+                        component={NavLink}
+                        to="/"
+                        color="inherit"
+                    >
+                        Home
+                    </Button>
                     {!user ?
                         <>
-                            <Button
-                                component={NavLink}
-                                to="/"
-                                color="inherit"
-                            >
-                                Home
-                            </Button>
                             <Button
                                 component={NavLink}
                                 color="inherit"
@@ -52,11 +65,35 @@ const HeaderAppBar = () => {
                             </Button>
                         </>
                         :
-                        <Button
-                            component={NavLink}
-                            to="/add-new-post"
-                            color='inherit'
-                        >Add new post</Button>
+                        <>
+                            <Button
+                                aria-controls="simple-menu"
+                                aria-haspopup="true"
+                                onClick={handleClick}
+                                color="inherit"
+                            >
+                                {user.name}
+                            </Button>
+                            <Menu
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            keepMounted
+                            open={Boolean(anchorEl)}
+                            onClose={() => setAnchorEl(null)}
+                            >
+                            <MenuItem
+                                component={NavLink}
+                                to="/add-new-post"
+                            >
+                                Добавить новый пост
+                            </MenuItem>
+                            <MenuItem
+                                onClick={handleClose}
+                            >
+                                Выход
+                            </MenuItem>
+                            </Menu>
+                        </>
                     }
                 </Toolbar>
             </AppBar>

@@ -13,21 +13,23 @@ const Main = () => {
     }, [dispatch]);
 
     return (
-        <Container maxWidth='lg'>
-            <Typography gutterBottom align="center" variant="h4" component="h2">
-                Посты
-            </Typography>
-            <Grid container justify="center">
-                {posts && posts.map(item => <PostsItem
-                    key={item._id}
-                    userName={item.author.name}
-                    datetime={item.datetime}
-                    id={item._id}
-                    title={item.title}
-                    image={item.image}
-                />)}
-            </Grid>
-        </Container>
+        <>
+            <Container maxWidth='lg'>
+                <Typography gutterBottom align="center" variant="h4" component="h2">
+                    Посты
+                </Typography>
+                <Grid container justify="center">
+                    {posts && posts.map(item => <PostsItem
+                        key={item._id}
+                        userName={item.author.name}
+                        datetime={item.datetime}
+                        id={item._id}
+                        title={item.title}
+                        image={item.image}
+                    />)}
+                </Grid>
+            </Container>
+        </>
     );
 };
 

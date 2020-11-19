@@ -28,27 +28,29 @@ const SinglePostItem = ({title, description, image, userName, datetime}) => {
 
     return (
         <Grid container className={classes.root} direction="column" justify="center">
-            <Typography variant="h4" component="h4" gutterBottom align="center">
-                {title}
-            </Typography>
-            <CardHeader
-                title={userName}
-                subheader={
-                    <Moment format="DD.MM.YYYY HH.mm">{datetime}</Moment>
-                }
-            />
-            <CardMedia
-                component="img"
-                alt={title}
-                image={path}
-                title={title}
-                className={classes.img}
-            />
-            <CardContent>
-                <Typography variant="body1">
-                    {description}
+            <Grid item>
+                <Typography variant="h4" component="h4" gutterBottom align="center">
+                    {title}
                 </Typography>
-            </CardContent>
+                <CardHeader
+                    title={userName}
+                    subheader={
+                        <Moment format="DD.MM.YYYY HH.mm">{datetime}</Moment>
+                    }
+                />
+                <CardMedia
+                    component="img"
+                    alt={title}
+                    image={path}
+                    title={title}
+                    className={classes.img}
+                />
+                <CardContent>
+                    <Typography variant="body1" component="p">
+                        {description}
+                    </Typography>
+                </CardContent>
+            </Grid>
         </Grid>
     );
 };
