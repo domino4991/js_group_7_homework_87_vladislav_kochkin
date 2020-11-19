@@ -27,7 +27,19 @@ router.get('/', async (req, res) => {
         if(!posts && posts.length === 0) return res.send({message: 'Еще нет ни одного поста'});
         return res.send(posts);
     } catch (e) {
-        return res.status(500).send({error: e});
+        return res.status(500).send(e);
+    }
+});
+
+router.get('/:id', async (req, res) => {
+    try {
+        const post = await Post
+            .findOne({_id: req.params.id})
+            .populate('author', 'name');
+        if(!post) return res.status(404).send({error: 'Пост не найден'});
+        return res.send(post);
+    } catch (e) {
+        return res.status(500).send(e);
     }
 });
 
