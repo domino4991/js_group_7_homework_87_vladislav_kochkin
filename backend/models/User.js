@@ -9,7 +9,7 @@ const SALT_WORK_FACTOR = 10;
 const UserSchema = new Schema({
     username: {
         type: String,
-        required: [true, 'Поле username обязательно для заполнения'],
+        required: [true, 'Поле "Логин" обязательно для заполнения'],
         unique: true,
         validate: {
             validator: async (val) => {
@@ -21,7 +21,7 @@ const UserSchema = new Schema({
     },
     password: {
         type: String,
-        required: [true, 'Поле password обязательно для заполнения']
+        required: [true, 'Поле "Пароль" обязательно для заполнения']
     },
     name: {
         type: String,
