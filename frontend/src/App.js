@@ -1,11 +1,21 @@
 import React from 'react';
 import './App.css';
+import Layout from "./components/Layout/Layout";
+import Main from "./containers/Main/Main";
+import {Route, Switch} from "react-router-dom";
+import SinglePost from "./containers/SinglePost/SinglePost";
 
 const App = () => {
   return (
-    <div className="App">
-      <h1>Hello world</h1>
-    </div>
+    <>
+      <Layout>
+          <Switch>
+              <Route path='/' exact component={Main} />
+              <Route path="/post/:id" component={SinglePost} />
+              <Route render={() => <h1 style={{textAlign: 'center'}}>404 Page Not Found</h1>} />
+          </Switch>
+      </Layout>
+    </>
   );
 }
 
