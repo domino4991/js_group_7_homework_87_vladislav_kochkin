@@ -15,14 +15,17 @@ const UserSchema = new Schema({
             validator: async (val) => {
                 const user = await User.findOne({username: val});
                 if(user) return false;
-            }
+            },
+            message: 'Такой пользователь уже существует'
         },
-        message: 'Такой пользователь уже существует'
     },
     password: {
         type: String,
-        required: [true, 'Поле password обязательно для заполнения'],
-        minlength: 8
+        required: [true, 'Поле password обязательно для заполнения']
+    },
+    name: {
+        type: String,
+        required: [true, 'Поле имя обязательно для заполнения']
     },
     token: {
         type: String,
