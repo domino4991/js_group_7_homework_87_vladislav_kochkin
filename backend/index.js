@@ -22,7 +22,7 @@ const run = async () => {
     app.use('/users', users);
     app.use('/comments', comments);
     app.use((req, res) => {
-        res.status(404).send({error: '404 Page Not Found'});
+        res.status(404).send({error: '404 Not Found'});
     })
 
     app.listen(PORT, () => {

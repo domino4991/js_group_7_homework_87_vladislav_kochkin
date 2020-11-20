@@ -16,9 +16,10 @@ router.get('/:id', async (req, res) => {
     try {
         const comments = await Comment
             .find({post: req.params.id})
-            .populate('user', 'name')
+            .sort({datetime: -1})
+            .populate('user', 'name -_id')
             .limit(20);
-        if(!comments || comments.length === 0) return res.status(404).send({error: 'Комментариев к данному посту нет'});
+        if(!comments || comments.length === 0) return res.status(404).send({error: 'Комментариев к данному посту ещё нет'});
         return res.send(comments);
     } catch (e) {
         return res.status(500).send({error: 'Internal Server Error'});
