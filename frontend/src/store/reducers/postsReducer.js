@@ -1,4 +1,10 @@
-import {GET_POSTS_ERROR, GET_POSTS_SUCCESS, GET_SINGLE_POST_ERROR, GET_SINGLE_POST_SUCCESS} from "../actionTypes";
+import {
+    GET_POSTS_ERROR,
+    GET_POSTS_SUCCESS,
+    GET_SINGLE_POST_ERROR,
+    GET_SINGLE_POST_SUCCESS, POST_NEW_POST_ERROR,
+    POST_NEW_POST_SUCCESS
+} from "../actionTypes";
 
 const initialState = {
     posts: null,
@@ -22,9 +28,15 @@ export const postsReducer = (state = initialState, action) => {
             };
         case GET_POSTS_ERROR:
         case GET_SINGLE_POST_ERROR:
+        case POST_NEW_POST_ERROR:
             return {
                 ...state,
                 error: action.error
+            };
+        case POST_NEW_POST_SUCCESS:
+            return {
+                ...state,
+                error: null
             };
         default:
             return state;

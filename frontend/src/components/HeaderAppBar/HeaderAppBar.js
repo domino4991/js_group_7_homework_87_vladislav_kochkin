@@ -1,9 +1,10 @@
 import React from 'react';
 import {makeStyles} from "@material-ui/core/styles";
-import {AppBar, Toolbar, Typography, Button, Menu, MenuItem} from "@material-ui/core";
+import {AppBar, Toolbar, Typography, Button, Menu, MenuItem, Avatar} from "@material-ui/core";
 import {NavLink} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutUser} from "../../store/actions/usersActions";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -15,6 +16,9 @@ const useStyles = makeStyles((theme) => ({
     },
     link: {
         display: 'inline-block'
+    },
+    avatar: {
+        backgroundColor: 'transparent'
     }
 }));
 
@@ -72,6 +76,9 @@ const HeaderAppBar = () => {
                                 onClick={handleClick}
                                 color="inherit"
                             >
+                                <Avatar className={classes.avatar}>
+                                    <AccountCircleIcon />
+                                </Avatar>
                                 {user.name}
                             </Button>
                             <Menu

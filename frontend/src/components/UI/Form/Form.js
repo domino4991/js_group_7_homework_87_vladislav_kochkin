@@ -16,7 +16,16 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-const Form = ({username, password, name, changed, submitted, getFieldError, register}) => {
+const Form = ({
+    username,
+    password,
+    name,
+    changed,
+    submitted,
+    getFieldError,
+    register,
+    btnLabel
+}) => {
     const classes = useStyles();
     return (
         <form
@@ -45,7 +54,7 @@ const Form = ({username, password, name, changed, submitted, getFieldError, regi
                     error={!!getFieldError('name')}
                     helperText={getFieldError('name')}
                     value={name}
-                    type="name"
+                    type="text"
                     onChange={changed}
                     className={classes.input}
                 />
@@ -68,7 +77,7 @@ const Form = ({username, password, name, changed, submitted, getFieldError, regi
                 type="submit"
                 className={classes.signInBtn}
             >
-                Sign in
+                {btnLabel}
             </Button>
         </form>
     );
@@ -80,7 +89,8 @@ Form.propTypes = {
     changed: PropTypes.func.isRequired,
     submitted: PropTypes.func.isRequired,
     getFieldError: PropTypes.func,
-    register: PropTypes.bool.isRequired
+    register: PropTypes.bool.isRequired,
+    btnLabel: PropTypes.string.isRequired
 };
 
 export default Form;

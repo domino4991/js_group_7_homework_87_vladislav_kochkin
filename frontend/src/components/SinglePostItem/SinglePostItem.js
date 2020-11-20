@@ -5,11 +5,13 @@ import {
     CardMedia,
     Grid,
     makeStyles,
-    Typography
+    Typography,
+    Avatar
 } from "@material-ui/core";
 import Moment from "react-moment";
 import {apiUrl} from "../../constants";
 import PropTypes from "prop-types";
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -19,6 +21,17 @@ const useStyles = makeStyles(theme => ({
         height: 'auto',
         maxWidth: 400,
         margin: '0 auto'
+    },
+    avatar: {
+        margin: "0 auto",
+        marginBottom: theme.spacing(4),
+        backgroundColor: 'transparent',
+        width: 70,
+        height: 70
+    },
+    textSvg: {
+        color: "#000",
+        fontSize: '50px'
     }
 }));
 
@@ -38,13 +51,15 @@ const SinglePostItem = ({title, description, image, userName, datetime}) => {
                         <Moment format="DD.MM.YYYY HH.mm">{datetime}</Moment>
                     }
                 />
-                <CardMedia
+                {image ? <CardMedia
                     component="img"
                     alt={title}
                     image={path}
                     title={title}
                     className={classes.img}
-                />
+                /> : <Avatar className={classes.avatar}>
+                    <QuestionAnswerIcon className={classes.textSvg} />
+                </Avatar>}
                 <CardContent>
                     <Typography variant="body1" component="p">
                         {description}

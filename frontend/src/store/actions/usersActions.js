@@ -17,9 +17,12 @@ const registerUserError = error => ({type: REGISTER_USER_ERROR, error});
 export const registerUser = userData => {
     return async dispatch => {
         try {
-            await axiosApi.post('/users', userData);
+            const response = await axiosApi.post('/users', userData);
             dispatch(registerUserSuccess());
-            dispatch(push('/login'));
+            toast.success(response.data.message + '. Вы будете перенаправлены на страницу входа.');
+            setTimeout(() => {
+                dispatch(push('/login'));
+            }, 5000);
         } catch (e) {
             if(e.response && e.response.data) {
                 dispatch(registerUserError(e.response.data));

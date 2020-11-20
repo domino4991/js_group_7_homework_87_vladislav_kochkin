@@ -2,8 +2,23 @@ import React, {useState} from 'react';
 import Form from "../../components/UI/Form/Form";
 import {useDispatch, useSelector} from "react-redux";
 import {registerUser} from "../../store/actions/usersActions";
+import {Typography, Avatar, makeStyles} from "@material-ui/core";
+import LockIcon from '@material-ui/icons/Lock';
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+const useStyles = makeStyles(theme => ({
+    avatar: {
+        margin: "0 auto",
+        marginBottom: theme.spacing(4),
+        backgroundColor: theme.palette.secondary.main,
+        width: theme.spacing(7),
+        height: theme.spacing(7)
+    }
+}));
 
 const Register = (props) => {
+    const classes = useStyles();
     const {error} = useSelector(state => state.users);
     const [user, setUser] = useState({
         username: '',
@@ -37,6 +52,12 @@ const Register = (props) => {
 
     return (
         <>
+            <Typography gutterBottom align="center" variant="h4" component="h4">
+                Регистрация
+            </Typography>
+            <Avatar className={classes.avatar}>
+                <LockIcon />
+            </Avatar>
             <Form
                 password={user.password}
                 submitted={e => onSubmittedForm(e)}
@@ -46,7 +67,9 @@ const Register = (props) => {
                 name={user.name}
                 path={props.match.url}
                 register={true}
+                btnLabel="Отправить"
             />
+            <ToastContainer autoClose={6000} />
         </>
     );
 };
